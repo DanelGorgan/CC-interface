@@ -10,8 +10,7 @@ const INITIAL_STATE = {
   passwordOne:    '',
   passwordTwo:    '',
   error:          null,
-  role:           {value:'Student', label: 'Student'},
-  professorTitle: '',
+  role:           {value:'Proprietar', label: ''},
 };
 
 class SignUpForm extends React.Component {
@@ -34,7 +33,6 @@ class SignUpForm extends React.Component {
 
   render() {
     const {
-      fullName,
       email,
       role,
       passwordOne,
@@ -42,15 +40,9 @@ class SignUpForm extends React.Component {
       registrationNumber,
       professorTitle,
     } = this.state;
-  
+
     return (
       <form className='sign-up-form' onSubmit={this.onSubmit}>
-        <Input
-          title    = 'Nume Complet'
-          value    = {fullName}
-          name     = 'fullName'
-          onChange = {(v) => this.onChange(v, 'fullName')}
-          />
 
         <Input
           title    = 'Email'
@@ -60,32 +52,12 @@ class SignUpForm extends React.Component {
 
         <div className="sign-up-form__row">
           <InputDropdown
-            className   = 'sign-up-form__role-dropdown'
             title       = "Rol"
             value       = {role}
             onChange    = {(v) => this.onChange(v, 'role')}
-            options     = {['Student', 'Profesor']}
+            options     = {['Owner', 'TBD']}
             placeholder = 'Alege un rol'
           />
-
-          {
-            role.value === 'Student' &&
-              <Input
-                title    = "Numar Matricol"
-                value    = {registrationNumber}
-                onChange = {(v) => this.onChange(v, 'registrationNumber')}
-              />
-          }
-
-          {
-            role.value === 'Profesor' &&
-              <Input
-                title       = "Titlu"
-                value       = {professorTitle}
-                onChange    = {(v) => this.onChange(v, 'professorTitle')}
-                placeholder = 'Conf. Dr.'
-              />
-          }
         </div>
 
 
