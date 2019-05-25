@@ -12,7 +12,6 @@ class SettingsFeedback extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-    console.log(e);
   }
 
   onChange = (value, key) => {

@@ -8,8 +8,8 @@ class PlaceTile extends React.Component {
   render() {
     return (
       <Link className='course-tile ems-panel panel panel-sm' to={{
-        pathname: `/courses/${this.props.place.id}`,
-        state: this.props.course
+        pathname: `/places/${this.props.place.id}`,
+        state: this.props.place
       }}>
         <div className="course-tile__title">{this.props.place.name}</div>
 

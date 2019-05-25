@@ -28,10 +28,7 @@
     "rimraf": "^2.6.2"
   },
   "scripts": {
-    "start": "concurrently 'npm:watch-scss' 'npm:watch-react'",
-    "watch-react": "rimraf ./build && react-scripts start",
-    "watch-scss": "nodemon -e scss -x \"npm run build-css\"",
-    "build-css": "node-sass src/styles/scss/ -o src/styles/css",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

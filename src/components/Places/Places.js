@@ -1,6 +1,6 @@
 import React      from 'react';
 
-import PlaceTile from './CourseTile'
+import PlaceTile from './PlaceTile'
 
 import { connect } from "react-redux";
 
@@ -15,7 +15,6 @@ class Places extends React.Component {
   }
 
   render() {
-      console.log(this.props.places)
     if (!this.props.places) {
       return null;
     }
