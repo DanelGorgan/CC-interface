@@ -3,6 +3,7 @@ import {Route, Switch} from 'react-router';
 
 import Layout from './components/Layout';
 import Home from './components/Home';
+import Form from './components/Form';
 import Places from './components/Places';
 import {Place} from './components/Places';
 import setAuthToken from "./utils/setAuthToken";
@@ -23,6 +24,7 @@ class App extends Component {
                     <Route exact path='/' component={Home}/>
                     <Route exact path={ROUTES.PLACES} component={Places}/>
                     <Route exact path={ROUTES.PLACE} component={Place}/>
+                    <Route exact path={ROUTES.FORM} component={Form}/>
                     <Route exact path={ROUTES.STATISTICS} component={Statistics}/>
                 </Layout>
             </Switch>

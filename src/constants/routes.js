@@ -1,6 +1,7 @@
 const ROUTES = {
     PLACES: '/places',
     PLACE: '/places/:placesId',
+    FORM: '/places/:placesId/form',
     ACCOUNT: '/account',
     STATISTICS: '/statistics',
     SIGN_IN: '/signin',

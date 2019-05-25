@@ -3,6 +3,7 @@ import React from 'react';
 import Button from "@material-ui/core/Button";
 
 import '../../styles/css/Course.css'
+import {Link} from "react-router-dom";
 
 class Place extends React.Component {
     render() {
@@ -35,14 +36,18 @@ class Place extends React.Component {
 
                     </div>
                 </div>
-
-                <Button
-                    className="course__submit"
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    style={{marginTop: "30px", backgroundColor: '#0075ff'}}> Ma inscriu
-                </Button>
+                <Link to={{
+                    pathname: `/places/${place.id}/form`,
+                    state: this.props.place
+                }}>
+                    <Button
+                        className="course__submit"
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        style={{marginTop: "30px", backgroundColor: '#0075ff'}}> Rezerva
+                    </Button>
+                </Link>
             </div>
         )
     }
