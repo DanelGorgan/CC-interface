@@ -1,0 +1,30 @@
+.course {
+    width: 800px;
+    padding: 50px 30px;
+}
+
+.course__title {
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.course__meta {
+    font-size: 28px;
+    margin-top: 16px;
+}
+
+.course__meta--bold {
+    font-weight: 600;
+    color: #99A4B0;
+    line-height: 60px;
+}
+
+.place__li--bold {
+    font-weight: 500;
+    color: #99A4B0;
+    line-height: 20px;
+}
+
+.list__contact {
+    margin: 0 0 0 30px;
+}

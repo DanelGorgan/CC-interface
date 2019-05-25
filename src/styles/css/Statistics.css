@@ -1,0 +1,29 @@
+.statistics {
+  margin: auto;
+  background-color: white;
+  padding: 30px 35px;
+  min-width: 860px;
+  flex-direction: column; }
+  .statistics__header {
+    flex-grow: 1;
+    margin-right: 40px; }
+    .statistics__header-wrapper {
+      display: flex; }
+  .statistics__dropdown {
+    width: auto;
+    padding-bottom: 0;
+    min-width: 200px; }
+  .statistics__legend-row {
+    display: flex;
+    padding: 3px 0; }
+  .statistics__legend-simbol {
+    width: 30px;
+    height: 15px; }
+    .statistics__legend-simbol--my-grade {
+      background-color: #0075ff; }
+    .statistics__legend-simbol--best-grade {
+      background-color: #ceefa7; }
+    .statistics__legend-simbol--worst-grade {
+      background-color: #f79494; }
+  .statistics__legend-text {
+    padding-left: 10px; }

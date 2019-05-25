@@ -1,0 +1,8 @@
+.settings {
+  margin: auto; }
+  .settings__paper {
+    display: flex;
+    flex-direction: column;
+    min-width: 600px;
+    min-height: 400px;
+    padding: 30px; }

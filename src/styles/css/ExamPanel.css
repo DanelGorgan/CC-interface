@@ -1,0 +1,18 @@
+.exam-panel:hover {
+  box-shadow: 0 3px 7px 4px rgba(0, 0, 0, 0.12); }
+
+.exam-panel__type {
+  color: #99A4B0; }
+
+.exam-panel__course-title {
+  font-weight: 600;
+  font-size: 28px; }
+
+.exam-panel__meta {
+  color: #1a324e; }
+  .exam-panel__meta--mute {
+    color: #99A4B0; }
+
+.contour {
+  color: green;
+  float: right; }

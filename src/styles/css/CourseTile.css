@@ -1,0 +1,12 @@
+.course-tile:hover {
+  box-shadow: 0 3px 7px 4px rgba(0, 0, 0, 0.12); }
+
+.course-tile__title {
+  font-size: 24px;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+  font-weight: 700; }
+
+.course-tile__meta {
+  color: #99A4B0;
+  font-weight: 200; }

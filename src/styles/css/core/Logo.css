@@ -1,0 +1,10 @@
+.logo {
+  letter-spacing: 1.2px; }
+  .logo__acronym {
+    padding-left: 1px;
+    font-weight: 300;
+    font-size: 35px; }
+    .logo__acronym--text {
+      font-size: 11px;
+      letter-spacing: -0.4px;
+      margin-left: -3px; }
