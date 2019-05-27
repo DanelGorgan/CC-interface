@@ -2,8 +2,8 @@
 
 export const getPlaces = () => dispatch => {
     axios
-       .get("https://datastore-project-236517.appspot.com/places")
-      .then(result => {
+        .get("https://datastore-project-236517.appspot.com/places")
+        .then(result => {
             dispatch({
                 type: 'GET_PLACES',
                 places: result.data

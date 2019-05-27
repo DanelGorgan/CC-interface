@@ -2,6 +2,7 @@
 import { routerReducer } from 'react-router-redux';
 import authReducer from './authReducer';
 import coursesReducer from './coursesReducer';
+import reservationsReducer from './reservationsReducer';
 import userReducer from './userReducer';
 import errorReducer from "./errorReducer";
 
@@ -16,6 +17,7 @@ const reducers = combineReducers({
     auth: authReducer,
     user: userReducer,
     places: coursesReducer,
+    reservations: reservationsReducer,
     errors: errorReducer
 });
 

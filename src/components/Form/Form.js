@@ -3,6 +3,11 @@ import {connect} from "react-redux";
 import TextField from '@material-ui/core/TextField';
 import '../../styles/css/Course.css'
 import Button from "@material-ui/core/Button";
+import {Redirect} from 'react-router-dom'
+
+import {submitForm} from '../../actions/Reservation'
+
+let ok = 0;
 
 class Form extends React.Component {
 
@@ -11,54 +16,56 @@ class Form extends React.Component {
 
         this.state = {
             email: "",
-            password: "",
-            role: "",
+            phone: "",
+            name: "",
+            reservations: "",
             errors: null
         };
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
     }
 
-    onChange(value, key) {
+    onChange(event, key) {
         this.setState({
-            [key]: value,
+            [key]: event.target.value,
         });
     };
 
     onSubmit(event) {
-        const userData = {
+        const formData = {
             email: this.state.email,
-            password: this.state.password,
-            role: "professor"
+            name: this.state.name,
+            phone: this.state.phone
         };
-        alert('Success!')
-        // this.props.submitForm(userData, this.props.history);
+
+        this.props.submitForm(formData);
+        ok = 1;
     }
 
     render() {
+        console.log(ok)
+        if (ok === 1) {
+            ok = 0;
+            return <Redirect to='/places'/>
+        }
+
         return (
             <div className='course panel'>
                 <p className="course__title">Form rezervare </p> <br/><br/>
                 Nume: <TextField
-                hintText="Enter Your Occupation"
-                floatingLabelText="name"
-                onChange = {
-                    (v) => this.onChange(v, 'name') }
+                onChange={
+                    (e) => this.onChange(e, 'name')}
             />
                 <br/> <br/>
                 Telefon:<TextField
-                hintText="Enter Your City"
-                floatingLabelText="phone"
-                onChange = {
-                    (v) => this.onChange(v, 'phone') }
+                onChange={
+                    (e) => this.onChange(e, 'phone')}
             />
                 <br/> <br/>
                 Email:<br/>
                 <TextField
-                    hintText="Enter Your Bio"
-                    floatingLabelText="Bio"
-                    onChange = {
-                        (v) => this.onChange(v, 'email') }
+                    onChange={
+                        (e) => this.onChange(e, 'email')}
                 />
                 <br/>
                 <Button
@@ -75,7 +82,7 @@ class Form extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    places: state.places.places
+    reservations: state.reservations.reservations
 });
 
-export default connect(mapStateToProps, {})(Form);
+export default connect(mapStateToProps, {submitForm})(Form);
