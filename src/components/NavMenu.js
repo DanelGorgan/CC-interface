@@ -21,6 +21,11 @@ export default props => (
                 <Glyphicon glyph='book' /> Places
               </NavItem>
             </LinkContainer>
+              <LinkContainer to={ROUTES.RESERVATION_PLACES}>
+              <NavItem>
+                <Glyphicon glyph='book' /> Reservations
+              </NavItem>
+            </LinkContainer>
             <LinkContainer to={ROUTES.STATISTICS}>
               <NavItem>
                 <Glyphicon glyph='stats' /> Statistics
