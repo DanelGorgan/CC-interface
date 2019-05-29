@@ -9,6 +9,11 @@ export default function (state = initialState, action) {
                 ...state,
                 reservations: action.reservations
             };
+        case 'PUT_RESERVATIONS':
+            return {
+                ...state,
+                reservationsResponse: action.reservationsResponse
+            };
         case 'POST_RESERVATION':
             return {
                 ...state,

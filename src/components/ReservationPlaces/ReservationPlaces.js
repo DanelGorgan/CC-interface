@@ -2,7 +2,7 @@ import React from 'react';
 
 import {connect} from "react-redux";
 
-import {getReservations} from '../../actions/ReservationPlaces'
+import {getReservations, updateReservation, deleteReservations} from '../../actions/ReservationPlaces'
 
 import TablePagination from '@material-ui/core/TablePagination'
 import Table from '@material-ui/core/Table';
@@ -24,7 +24,7 @@ import {withStyles} from "@material-ui/core/styles/index";
 import '../../styles/css/ReservationPlaces.css'
 
 
-let rowsCount = 0;
+let rowsCount = 0, rows = [];
 
 const actionsStyles = theme => ({
     root: {
@@ -56,7 +56,7 @@ class TablePaginationActions extends React.Component {
 
     render() {
         const count = rowsCount;
-        const { classes, page, rowsPerPage, theme } = this.props;
+        const {classes, page, rowsPerPage, theme} = this.props;
 
         return (
             <div className={classes.root}>
@@ -65,35 +65,35 @@ class TablePaginationActions extends React.Component {
                     disabled={page === 0}
                     aria-label="First Page"
                 >
-                    {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+                    {theme.direction === 'rtl' ? <LastPageIcon/> : <FirstPageIcon/>}
                 </IconButton>
                 <IconButton
                     onClick={this.handleBackButtonClick}
                     disabled={page === 0}
                     aria-label="Previous Page"
                 >
-                    {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+                    {theme.direction === 'rtl' ? <KeyboardArrowRight/> : <KeyboardArrowLeft/>}
                 </IconButton>
                 <IconButton
                     onClick={this.handleNextButtonClick}
                     disabled={page >= Math.ceil(count / rowsPerPage) - 1}
                     aria-label="Next Page"
                 >
-                    {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                    {theme.direction === 'rtl' ? <KeyboardArrowLeft/> : <KeyboardArrowRight/>}
                 </IconButton>
                 <IconButton
                     onClick={this.handleLastPageButtonClick}
                     disabled={page >= Math.ceil(count / rowsPerPage) - 1}
                     aria-label="Last Page"
                 >
-                    {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+                    {theme.direction === 'rtl' ? <FirstPageIcon/> : <LastPageIcon/>}
                 </IconButton>
             </div>
         );
     }
 }
 
-const TablePaginationActionsWrapped = withStyles(actionsStyles, { withTheme: true })(
+const TablePaginationActionsWrapped = withStyles(actionsStyles, {withTheme: true})(
     TablePaginationActions,
 );
 
@@ -111,33 +111,50 @@ class ReservationPlaces extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            reservationsResponse: [],
+            reservations: [],
             rows: [],
             page: 0,
             rowsPerPage: 5
         };
     }
 
+    onSubmit = (e, id) => {
+        if (e.target.name) {
+            e.target.firstChild.nodeValue = e.target.name
+        }
+
+        this.props.updateReservation(id, e.target.firstChild.nodeValue);
+    };
+
+    componentDidUpdate(prevProps) {
+        if (this.props !== prevProps) {
+            this.setState({
+                reservations: this.props.reservations,
+                rows: this.props.reservations,
+                reservationsResponse: this.props.reservationsResponse
+            });
+
+        }
+    }
+
     componentWillMount() {
-        // This method runs when the component is first added to the page
         this.props.getReservations();
     }
 
     handleChangePage = (event, page) => {
-        this.setState({ page });
+        this.setState({page});
     };
 
     handleChangeRowsPerPage = event => {
-        console.log(event.target.value)
-        this.setState({ page: 0, rowsPerPage: parseInt(event.target.value, 10) });
+        this.setState({page: 0, rowsPerPage: parseInt(event.target.value, 10)});
     };
 
     render() {
-        if (this.props.reservations && this.props.reservations.length === 0) {
+        if (this.state.reservations && this.state.reservations.length === 0) {
             return null;
         }
-        let rows = this.props.reservations;
         rowsCount = rows.length;
-
         return (
             <div className='courses-page'>
                 <Paper>
@@ -154,8 +171,8 @@ class ReservationPlaces extends React.Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage).map((row, i) => (
-                                <TableRow key={i}>
+                            {this.state.rows.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage).map((row, i) => (
+                                <TableRow key={row.id}>
                                     <TableCell component="th" scope="row">
                                         {row.place}
                                     </TableCell>
@@ -164,12 +181,21 @@ class ReservationPlaces extends React.Component {
                                     <TableCell align="right">{row.phone}</TableCell>
                                     <TableCell align="right">{row.fromDate}</TableCell>
                                     <TableCell align="right">{row.toDate}</TableCell>
-                                    <TableCell align="right">{row.status}</TableCell>
-                                    <ColorButton variant="contained" color="primary" className="accept"> Accept </ColorButton>
-                                    <Button variant="contained" color="secondary"> Decline </Button>
+                                    <TableCell
+                                        align="right">{this.state.status ? this.state.status : row.status}</TableCell>
+                                    <ColorButton variant="contained"
+                                                 color="primary"
+                                                 name="Accept"
+                                                 className="accept"
+                                                 // disabled={!!this.state.status}
+                                                 onClick={(e) => this.onSubmit(e, row.id)}> Accept </ColorButton>
+                                    <Button variant="contained"
+                                            color="secondary"
+                                            name="Decline"
+                                            // disabled={!!this.state.status}
+                                            onClick={(e) => this.onSubmit(e, row.id)}> Decline </Button>
                                 </TableRow>
                             ))}
-
                         </TableBody>
                         <TableFooter>
                             <TableRow>
@@ -196,7 +222,8 @@ class ReservationPlaces extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    reservations: state.reservations.reservations
+    reservations: state.reservations.reservations,
+    reservationsResponse: state.reservations.reservationsResponse
 });
 
-export default connect(mapStateToProps, {getReservations})(ReservationPlaces);
+export default connect(mapStateToProps, {getReservations, updateReservation})(ReservationPlaces);
