@@ -10,7 +10,6 @@ export default function (state = initialState, action) {
                 places: action.places
             };
         case 'GET_SEARCH_PLACES':
-            console.log('GET_SEARCH_PLACES')
             return {
                 ...state,
                 places: action.places.results
