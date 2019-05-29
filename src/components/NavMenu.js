@@ -1,7 +1,7 @@
 ﻿import React from 'react';
-import { Link } from 'react-router-dom';
-import { Glyphicon, Nav, Navbar, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import {Link} from 'react-router-dom';
+import {Glyphicon, Nav, Navbar, NavItem} from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 import '../styles/css/NavMenu.css'
 
 import ROUTES from '../constants/routes'
@@ -12,7 +12,7 @@ export default props => (
             <Navbar.Brand>
                 <Link to={'/'}>Quilly</Link>
             </Navbar.Brand>
-            <Navbar.Toggle />
+            <Navbar.Toggle/>
         </Navbar.Header>
         <Nav className='nav-menu'>
           <Nav className='pull-left'>
