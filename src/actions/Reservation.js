@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const submitForm = (data) => dispatch => {
     axios
-        .post("https://datastore-project-236517.appspot.com/reservation", data)
+        .post("https://datastore-project-236517.appspot.com/reservations", data)
         .then(result => {
             dispatch({
                 type: 'POST_RESERVATION',
