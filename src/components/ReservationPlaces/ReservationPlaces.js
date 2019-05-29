@@ -17,9 +17,11 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import Button from '@material-ui/core/Button';
+import green from '@material-ui/core/colors/green';
 import {withStyles} from "@material-ui/core/styles/index";
 
-import '../../styles/css/Courses.css'
+import '../../styles/css/ReservationPlaces.css'
 
 
 let rowsCount = 0;
@@ -95,6 +97,16 @@ const TablePaginationActionsWrapped = withStyles(actionsStyles, { withTheme: tru
     TablePaginationActions,
 );
 
+const ColorButton = withStyles(theme => ({
+    root: {
+        color: theme.palette.getContrastText(green[500]),
+        backgroundColor: green[500],
+        '&:hover': {
+            backgroundColor: green[700],
+        },
+    },
+}))(Button);
+
 class ReservationPlaces extends React.Component {
     constructor(props) {
         super(props);
@@ -153,8 +165,11 @@ class ReservationPlaces extends React.Component {
                                     <TableCell align="right">{row.fromDate}</TableCell>
                                     <TableCell align="right">{row.toDate}</TableCell>
                                     <TableCell align="right">{row.status}</TableCell>
+                                    <ColorButton variant="contained" color="primary" className="accept"> Accept </ColorButton>
+                                    <Button variant="contained" color="secondary"> Decline </Button>
                                 </TableRow>
                             ))}
+
                         </TableBody>
                         <TableFooter>
                             <TableRow>
