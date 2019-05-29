@@ -99,7 +99,7 @@ const TablePaginationActionsWrapped = withStyles(actionsStyles, { withTheme: tru
 
 const ColorButton = withStyles(theme => ({
     root: {
-        color: theme.palette.getContrastText(green[500]),
+        color: '#ffffff',
         backgroundColor: green[500],
         '&:hover': {
             backgroundColor: green[700],
