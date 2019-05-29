@@ -17,19 +17,41 @@ class Places extends React.Component {
     }
 
     search = () => {
-        this.props.searchPlaces(document.getElementById('select').value, document.getElementById('location').value);
+        const type = document.getElementById('select').value;
+        const name = document.getElementById('location').value
+        if (name === '') {
+            this.props.getPlaces();
+            return;
+        }
+        this.props.searchPlaces(type, name);
     }
 
     render() {
-        if (!this.props.places) {
-            return null;
+
+        if (this.props.places.length === 0) {
+            return (
+                <div className='courses-page'>
+                    <div className='search'>
+                        <select id='select' className="browser-default custom-select">
+                            <option value="restaurant">restaurant</option>
+                            <option value="club">club</option>
+                            <option value="office">office</option>
+                        </select>
+                        <input type="text" name="name" id="location" />
+                        <button className="btn btn-primary btn-sm" onClick={this.search}>Cauta</button>
+                        <p> Nu s-a gasit nimic </p>
+                    </div>
+                </div>
+            )
         }
+        console.log(this.props.places);
 
         return (
             <div className='courses-page'>
                 <div className='search'>
-                    <select id='select' class="browser-default custom-select">
+                    <select id='select' className="browser-default custom-select">
                         <option value="restaurant">restaurant</option>
+                        <option value="club">club</option>
                         <option value="office">office</option>
                     </select>
                     <input type="text" name="name" id="location" />

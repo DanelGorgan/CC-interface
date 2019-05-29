@@ -4,12 +4,18 @@
 
 export default function (state = initialState, action) {
     switch (action.type) {
-      case 'GET_PLACES':
+        case 'GET_PLACES':
             return {
                 ...state,
                 places: action.places
             };
-       case 'GET_ERRORS_PLACES':
+        case 'GET_SEARCH_PLACES':
+            console.log('GET_SEARCH_PLACES')
+            return {
+                ...state,
+                places: action.places.results
+            };
+        case 'GET_ERRORS_PLACES':
             return {
                 ...state,
                 errors: action.payload
