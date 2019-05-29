@@ -18,6 +18,7 @@ const reducers = combineReducers({
     user: userReducer,
     places: coursesReducer,
     reservations: reservationsReducer,
+    reservationsResponse: reservationsReducer,
     errors: errorReducer
 });
 
