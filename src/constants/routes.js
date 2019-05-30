@@ -3,6 +3,7 @@ const ROUTES = {
     PLACES: '/places',
     MY_PLACES: '/my-places',
     MY_PLACE: '/my-places/:placesId',
+    MY_PLACE_FORM: '/my-places/form',
     PLACE: '/places/:placesId',
     FORM: '/places/:placesId/form',
     ACCOUNT: '/account',
