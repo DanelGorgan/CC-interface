@@ -18,11 +18,24 @@ class Form extends React.Component {
             email: "",
             phone: "",
             name: "",
+            fromDate: "",
+            toDate: "",
+            comment: "",
+            reminder: "",
             reservations: "",
             errors: null
         };
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props !== prevProps) {
+            this.setState({
+                reservations: this.props.reservations
+            });
+
+        }
     }
 
     onChange(event, key) {
@@ -35,38 +48,84 @@ class Form extends React.Component {
         const formData = {
             email: this.state.email,
             name: this.state.name,
-            phone: this.state.phone
+            fromDateTimestamp: Date.now(this.state.fromDate),
+            toDateTimestamp: Date.now(this.state.toDate),
+            comment: this.state.comment,
+            nrRemindHours: this.state.reminder,
+            phone: this.state.phone,
+            wasReminded: false,
+            status: "pending",
+            placeId: this.props.location.pathname.split('/')[2]
         };
-
         this.props.submitForm(formData);
-        ok = 1;
     }
 
     render() {
-        console.log(ok)
-        if (ok === 1) {
-            ok = 0;
+        if (this.state.reservations) {
             return <Redirect to='/places'/>
         }
 
         return (
             <div className='course panel'>
                 <p className="course__title">Form rezervare </p> <br/><br/>
-                Nume: <TextField
-                onChange={
+                <TextField
+                    label="Nume"
+                    onChange={
                     (e) => this.onChange(e, 'name')}
             />
-                <br/> <br/>
-                Telefon:<TextField
+                <TextField
+                label="Telefon"
                 onChange={
                     (e) => this.onChange(e, 'phone')}
             />
-                <br/> <br/>
-                Email:<br/>
+                <br/>
                 <TextField
+                    label="De la"
+                    type="datetime-local"
+                    defaultValue="2019-05-30T10:30"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    onChange={
+                    (e) => this.onChange(e, 'fromDate')}
+
+                     />
+                <TextField
+                    label="Pana la"
+                    type="datetime-local"
+                    defaultValue="2017-05-30T10:30"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    onChange={
+                    (e) => this.onChange(e, 'toDate')}
+                />
+                <br/>
+
+                <TextField
+                    label="Email"
                     onChange={
                         (e) => this.onChange(e, 'email')}
                 />
+
+                <TextField
+                label="La cate ore doresti sa primesti reminder?"
+                type="number"
+                onChange={
+                    (e) => this.onChange(e, 'reminder')}
+                />
+
+                <TextField
+                id="outlined-textarea"
+                label="Comentarii"
+                multiline
+                margin="normal"
+                variant="outlined"
+                onChange={
+                    (e) => this.onChange(e, 'comment')}
+                />
+
+
                 <br/>
                 <Button
                     className="course__submit"
