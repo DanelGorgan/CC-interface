@@ -6,6 +6,7 @@ import reservationsReducer from './reservationsReducer';
 import mapReducer from './MapReducer';
 import userReducer from './userReducer';
 import errorReducer from "./errorReducer";
+import registerReducer from "./registerReducer";
 
 
 /*
@@ -16,6 +17,7 @@ import errorReducer from "./errorReducer";
 const reducers = combineReducers({
     routing: routerReducer,
     auth: authReducer,
+    register: registerReducer,
     user: userReducer,
     places: coursesReducer,
     link: mapReducer,

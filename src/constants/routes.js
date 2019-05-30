@@ -1,6 +1,8 @@
 const ROUTES = {
     RESERVATION_PLACES: '/reservations',
     PLACES: '/places',
+    MY_PLACES: '/my-places',
+    MY_PLACE: '/my-places/:placesId',
     PLACE: '/places/:placesId',
     FORM: '/places/:placesId/form',
     ACCOUNT: '/account',

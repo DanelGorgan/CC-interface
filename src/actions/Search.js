@@ -6,7 +6,7 @@ export const searchPlaces = (type, name) => dispatch => {
         .then(result => {      
             dispatch({
                 type: 'GET_SEARCH_PLACES',
-                places: JSON.parse(JSON.stringify(result.data))
+                places: result.data
             })
         })
         .catch(error => {
