@@ -5,20 +5,35 @@ import Button from "@material-ui/core/Button";
 import '../../styles/css/Course.css'
 import {Link} from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
-import {getLink} from "../../actions/Map";
+import {getStats} from "../../actions/Map";
+import CanvasJSReact from '../../assets/canvasjs.react';
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+let dataPoints = []
 
 class Place extends React.Component {
 
     componentWillMount() {
-        this.props.getLink()
+        this.props.getStats()
     }
 
     render() {
         // const placesId = this.props.match.params.placesId;
         const place = this.props.location.state;
         let link = `https://www.google.com/maps/embed/v1/place?q=${place.name}&key=AIzaSyAbBGJtRp255cAdDqpCMd0JBAJbINn0kRs`;
-        return (
+        
+        if(this.props.link === null)
+            return null
+        
+        console.log(this.props.link.rez)
 
+        this.props.link.rez.map(function(item, index) {
+            let elemDict = {}
+            elemDict["label"] = item[0]
+            elemDict["y"] = item[1]
+            dataPoints.push(elemDict)
+        });
+
+        return (
             <div className='course panel'>
                 <div className="course__title">{place.name}</div>
 
@@ -51,6 +66,8 @@ class Place extends React.Component {
                                 allowFullScreen>a</iframe>
                     </div>
 
+                    <RangeBarChart></RangeBarChart>
+
                 </div>
                 <Link to={{
                     pathname: `/places/${place.id}/form`,
@@ -69,8 +86,44 @@ class Place extends React.Component {
     }
 }
 
+class RangeBarChart extends React.Component {
+    render() {
+    const options = {
+        animationEnabled: true,
+        title:{
+            text: "Rezervari",
+            fontFamily: "helvetica"
+        },
+
+        axisX: {
+            title: "Ora",
+            titleFontSize: 20
+        },
+
+        axisY: {
+            title: "Procent ocupare %",
+            titleFontSize: 20
+        },
+        data: [{
+            type: "column",
+            yValueFormatString: "#,### Reservations",   
+            dataPoints: dataPoints
+        }]
+    }
+    return (
+    <div>
+        <h1>React Range Bar Chart</h1>
+        <CanvasJSChart options = {options} 
+            /*onRef = {ref => this.chart = ref}*/
+        />
+        { /*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+    </div>
+    );
+}
+}
+
 const mapStateToProps = state => ({
     link: state.link.link
 });
 
-export default connect(mapStateToProps, {getLink})(Place);
+export default connect(mapStateToProps, {getStats})(Place);
