@@ -23,14 +23,14 @@ export default props => (
         </LinkContainer>
         {
           !(localStorage.getItem('jwtToken')) ?
-          null:
-          <LinkContainer to={ROUTES.RESERVATION_PLACES}>
-            <NavItem>
-              <Glyphicon glyph='book' /> Reservations
+            null :
+            <LinkContainer to={ROUTES.RESERVATION_PLACES}>
+              <NavItem>
+                <Glyphicon glyph='book' /> Reservations
               </NavItem>
-          </LinkContainer>
+            </LinkContainer>
         }
-            <LinkContainer to={ROUTES.STATISTICS}>
+        <LinkContainer to={ROUTES.STATISTICS}>
           <NavItem>
             <Glyphicon glyph='stats' /> Statistics
               </NavItem>
@@ -46,25 +46,23 @@ export default props => (
           <LinkContainer to={ROUTES.SIGN_OUT}>
             <NavItem>
               <Glyphicon glyph='log-out' /> Sign Out
-              </NavItem>
+            </NavItem>
           </LinkContainer>
-        </Nav> : <Nav className='pull-right'>
-          <LinkContainer to={ROUTES.SIGN_IN}>
-            <NavItem>
-              <Glyphicon glyph='log-in' /> Sign In
-              </NavItem>
-          </LinkContainer>
-          <LinkContainer to={ROUTES.SIGN_UP}>
-            <NavItem>
-              <Glyphicon glyph='new-window' /> Sign Up
-              </NavItem>
-          </LinkContainer>
-          <LinkContainer to={ROUTES.SIGN_OUT}>
-        <NavItem>
-            <Glyphicon glyph='log-out' /> Sign Out
-              </NavItem>
-          </LinkContainer>
-        </Nav>}
         </Nav>
-    </Navbar>
+      :
+        <Nav className='pull-right'>
+        <LinkContainer to={ROUTES.SIGN_IN}>
+          <NavItem>
+            <Glyphicon glyph='log-in' /> Sign In
+            </NavItem>
+        </LinkContainer>
+        <LinkContainer to={ROUTES.SIGN_UP}>
+          <NavItem>
+            <Glyphicon glyph='new-window' /> Sign Up
+            </NavItem>
+        </LinkContainer>
+        </Nav>
+      }
+    </Nav>
+  </Navbar>
 );

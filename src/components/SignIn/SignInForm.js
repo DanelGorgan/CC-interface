@@ -34,7 +34,7 @@ class SignUpForm extends React.Component {
             rememberMe: false,
             role: "Student"
         };
-        this.props.loginUser(userData, this.props.history);
+        this.props.loginUser(userData);
     }
 
     render() {

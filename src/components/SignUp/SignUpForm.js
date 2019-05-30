@@ -1,27 +1,38 @@
-import React    from 'react';
+import React from 'react';
 
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import InputDropdown from '../core/InputDropdown'
-import Input         from '../core/Input'
-import Button        from "@material-ui/core/Button";
+import Input from '../core/Input'
+import Button from "@material-ui/core/Button";
 
-const INITIAL_STATE = {
-  fullName:       '',
-  email:          '',
-  passwordOne:    '',
-  passwordTwo:    '',
-  error:          null,
-  role:           {value:'Proprietar', label: ''},
-};
+import { registerUser } from '../../actions/Register'
 
 class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {...INITIAL_STATE};
+    this.state = {
+      email: "",
+      passwordOne: "",
+      passwordTwo: "",
+      role: "",
+      errors: null
+    };
+
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
-  onSubmit = event => {
-    // const { fullName, email, passwordOne } = this.state;
+  onSubmit = () => {
+    const userData = {
+      email: this.state.email,
+      password: this.state.passwordOne,
+      confirmPassword: this.state.passwordTwo,
+      role: "Student"
+    };
+
+    this.props.registerUser(userData);
   }
 
   onChange = (value, key) => {
@@ -32,61 +43,49 @@ class SignUpForm extends React.Component {
 
 
   render() {
-    const {
-      email,
-      role,
-      passwordOne,
-      passwordTwo,
-      registrationNumber,
-      professorTitle,
-    } = this.state;
-
+    if (this.props.register.isRegistered) {
+      return <Redirect to="/signin" />;
+    }
     return (
       <form className='sign-up-form' onSubmit={this.onSubmit}>
 
         <Input
-          title    = 'Email'
-          value    = {email}
-          onChange = {(v) => this.onChange(v, 'email')}
-          />
-
-        <div className="sign-up-form__row">
-          <InputDropdown
-            title       = "Rol"
-            value       = {role}
-            onChange    = {(v) => this.onChange(v, 'role')}
-            options     = {['Owner', 'TBD']}
-            placeholder = 'Alege un rol'
-          />
-        </div>
-
-
-        <Input
-          title       = 'Parola'
-          value       = {passwordOne}
-          onChange    = {(v) => this.onChange(v, 'passwordOne')}
-          type        = 'password'
-          placeholder = '1 Parola Mai Grea $/#43'
+          title='Email'
+          value={this.state.email}
+          onChange={(v) => this.onChange(v, 'email')}
         />
 
         <Input
-          title    = 'Confirma Parola'
-          value    = {passwordTwo}
-          onChange = {(v) => this.onChange(v, 'passwordTwo')}
-          type     = 'password'
+          title='Parola'
+          value={this.state.passwordOne}
+          onChange={(v) => this.onChange(v, 'passwordOne')}
+          type='password'
+          placeholder='1 Parola Mai Grea $/#43'
+        />
+
+        <Input
+          title='Confirma Parola'
+          value={this.state.passwordTwo}
+          onChange={(v) => this.onChange(v, 'passwordTwo')}
+          type='password'
         />
 
         <Button
-          onClick = {this.onSubmit}
-          className = "sign-up-form__submit"
-          variant = "contained"
-          color   = "primary"
-          size    = "large"
-          style   = {{ marginTop: "30px", backgroundColor: '#0075ff'}}> Creaza Cont
+          onClick={this.onSubmit}
+          className="sign-up-form__submit"
+          variant="contained"
+          color="primary"
+          size="large"
+          style={{ marginTop: "30px", backgroundColor: '#0075ff' }}> Creaza Cont
         </Button>
       </form>
     );
   }
 }
 
-export default SignUpForm;
+const mapStateToProps = state => ({
+  register: state.register,
+  errors: state.errors
+});
+
+export default connect(mapStateToProps, { registerUser })(SignUpForm);

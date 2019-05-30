@@ -21,10 +21,11 @@ export const loginUser = (userData, history) => dispatch => {
 
     })
     .catch(error => {
-      dispatch({
+      alert("Username sau parola gresita")
+      /*dispatch({
         type: 'GET_ERRORS_LOGIN',
         payload: error.response.data
-      })
+      })*/
     });
 
 };
