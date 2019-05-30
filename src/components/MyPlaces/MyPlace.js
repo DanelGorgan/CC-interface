@@ -5,12 +5,12 @@ import Button from "@material-ui/core/Button";
 import '../../styles/css/Course.css'
 import {Link} from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
-import {getLink} from "../../actions/Map";
+import {getStats} from "../../actions/Map";
 
 class MyPlace extends React.Component {
 
     componentWillMount() {
-        this.props.getLink()
+        this.props.getStats()
     }
 
     render() {
@@ -73,4 +73,4 @@ const mapStateToProps = state => ({
     link: state.link.link
 });
 
-export default connect(mapStateToProps, {getLink})(MyPlace);
+export default connect(mapStateToProps, {getStats})(MyPlace);
