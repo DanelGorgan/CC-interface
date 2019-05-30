@@ -2,7 +2,7 @@
 
 export const getReservations = () => dispatch => {
     axios
-        .get("https://datastore-project-236517.appspot.com/reservations/5634161670881280")
+        .get(`https://datastore-project-236517.appspot.com/reservations/${localStorage.getItem('userId')}`)
         .then(result => {
             console.log(result.data)
             dispatch({
