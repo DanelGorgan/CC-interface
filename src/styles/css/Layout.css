@@ -2,4 +2,6 @@
   padding: 30px 100px;
   margin: auto;
   display: flex;
-  justify-content: left; }
+  justify-content: left;
+  background-image: url("../../images/background.jpg");
+}
