@@ -6,6 +6,11 @@ import '../../styles/css/Course.css'
 import {Link} from "react-router-dom";
 
 class Place extends React.Component {
+
+    // asta e gen onCreate unde se apeleaza o functie
+    componentWillMount() {
+        //apel functie
+    }
     render() {
         // const placesId = this.props.match.params.placesId;
         const place = this.props.location.state;
