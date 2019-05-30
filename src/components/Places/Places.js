@@ -44,7 +44,6 @@ class Places extends React.Component {
                 </div>
             )
         }
-        console.log(this.props.places);
 
         return (
             <div className='courses-page'>
