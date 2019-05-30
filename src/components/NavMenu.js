@@ -55,11 +55,6 @@ export default props => (
               <Glyphicon glyph='new-window' /> Sign Up
               </NavItem>
           </LinkContainer>
-          <LinkContainer to={ROUTES.SIGN_OUT}>
-            <NavItem>
-              <Glyphicon glyph='log-out' /> Sign Out
-              </NavItem>
-          </LinkContainer>
         </Nav>}
         </Nav>
     </Navbar>

@@ -5,6 +5,7 @@ import coursesReducer from './coursesReducer';
 import reservationsReducer from './reservationsReducer';
 import userReducer from './userReducer';
 import errorReducer from "./errorReducer";
+import registerReducer from "./registerReducer";
 
 
 /*
@@ -15,6 +16,7 @@ import errorReducer from "./errorReducer";
 const reducers = combineReducers({
     routing: routerReducer,
     auth: authReducer,
+    register: registerReducer,
     user: userReducer,
     places: coursesReducer,
     reservations: reservationsReducer,
