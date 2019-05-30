@@ -31,7 +31,8 @@ class SignUpForm extends React.Component {
         const userData = {
             email: this.state.email,
             password: this.state.password,
-            role: "professor"
+            rememberMe: false,
+            role: "Student"
         };
         this.props.loginUser(userData, this.props.history);
     }
@@ -39,35 +40,34 @@ class SignUpForm extends React.Component {
     render() {
         // redirect here
         if (this.props.auth.isAuthenticated) {
-            return <Redirect to = "/" / > ;
+            return <Redirect to="/" />;
         }
         if (this.props.errors.errors) {
             this.props.errors.errors.Email ? alert(this.props.errors.errors.Email) : this.props.errors.errors.Password ? alert(this.props.errors.errors.Password) : alert(this.props.errors.errors)
             this.props.errors.errors = null
         }
 
-        return ( <
-            div className = 'sign-in-form' >
-            <
-            Input title = 'Email'
-            value = { this.state.email }
-            onChange = {
-                (v) => this.onChange(v, 'email') }
-            /> <
-            Input title = "Password"
-            type = "password"
-            value = { this.state.password }
-            onChange = {
-                (v) => this.onChange(v, 'password') }
-            /> <
-            Button onClick = { this.onSubmit }
-            variant = "contained"
-            color = "primary"
-            size = "medium"
-            style = {
-                { marginTop: "30px", width: "30%", backgroundColor: '#0075ff' } } > Sign In <
-            /Button> <
-            /div>
+        return (
+            <div className='sign-in-form'>
+                <Input title='Email'
+                    value={this.state.email}
+                    onChange={
+                        (v) => this.onChange(v, 'email')}
+                />
+                <Input title="Password"
+                    type="password"
+                    value={this.state.password}
+                    onChange={
+                        (v) => this.onChange(v, 'password')}
+                />
+                <Button onClick={this.onSubmit}
+                    variant="contained"
+                    color="primary"
+                    size="medium"
+                    style={
+                        { marginTop: "30px", width: "30%", backgroundColor: '#0075ff' }}>
+                    Sign In </Button>
+            </div>
         );
     }
 }
