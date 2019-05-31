@@ -21,7 +21,7 @@ export const getReservations = () => dispatch => {
 
 export const updateReservation = (id, response) => dispatch => {
     let body = {};
-    if (response.trim() === "Accept") {
+    if (response && response.trim() === "Accept") {
         body.status = "approved"
     } else {
         body.status = "declined"
