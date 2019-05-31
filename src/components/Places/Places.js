@@ -6,11 +6,22 @@ import { connect } from "react-redux";
 
 import { getPlaces } from '../../actions/Places'
 
-import { searchPlaces } from "../../actions/Search";
+import { searchPlaces, recommendPlaces } from "../../actions/Search";
 
 import '../../styles/css/Courses.css'
 
 class Places extends React.Component {
+
+    componentDidUpdate(prevProps) {
+        if (this.props !== prevProps) {
+            this.setState({
+                reservations: this.props.reservations,
+                rooms: this.props.rooms
+            });
+
+        }
+    }
+
     componentWillMount() {
         // This method runs when the component is first added to the page
         this.props.getPlaces();
@@ -24,10 +35,10 @@ class Places extends React.Component {
             return;
         }
         this.props.searchPlaces(type, name);
+        this.props.recommendPlaces(type, name);
     }
 
     render() {
-
         if (this.props.places.length === 0) {
             return (
                 <div className='courses-page'>
@@ -57,13 +68,16 @@ class Places extends React.Component {
                     <button className="btn btn-primary btn-sm" onClick={this.search}>Cauta</button>
                 </div>
                 {this.props.places.map((place, i) => <PlaceTile key={i} place={place} />)}
+                {this.props.recommend? <h2>Userii au mai cautat si: </h2> : null}
+                {this.props.recommend? this.props.recommend.rec.map((place) => <p>{place.name}</p>) : null}
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    places: state.places.places
+    places: state.places.places,
+    recommend: state.recommend.recommend
 });
 
-export default connect(mapStateToProps, { getPlaces, searchPlaces })(Places);
+export default connect(mapStateToProps, { getPlaces, searchPlaces, recommendPlaces })(Places);
