@@ -17,3 +17,21 @@ export const submitForm = (data) => dispatch => {
         });
 
 };
+
+export const getRooms = (id) => dispatch => {
+    axios
+        .get(`https://datastore-project-236517.appspot.com/places/${id}/rooms`)
+        .then(result => {
+            dispatch({
+                type: 'GET_ROOMS',
+                rooms: result.data
+            })
+        })
+        .catch(error => {
+            dispatch({
+                type: 'GET_ERRORS_RESERVATION',
+                payload: error.response.data
+            })
+        });
+
+};
