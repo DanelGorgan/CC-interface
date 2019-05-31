@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
 import {getStats} from "../../actions/Map";
 
+
 class MyPlace extends React.Component {
 
     componentWillMount() {

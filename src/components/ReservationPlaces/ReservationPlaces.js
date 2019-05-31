@@ -120,12 +120,11 @@ class ReservationPlaces extends React.Component {
         };
     }
 
-    onSubmit = (e, id) => {
+    onSubmit = (e, id, email) => {
         if (e.target.name) {
             e.target.firstChild.nodeValue = e.target.name
         }
-
-        this.props.updateReservation(id, e.target.firstChild.nodeValue);
+        this.props.updateReservation(id, e.target.firstChild.nodeValue, email);
 
     };
 
@@ -195,12 +194,12 @@ class ReservationPlaces extends React.Component {
                                                  name="Accept"
                                                  className="accept"
                                                  // disabled={!!this.state.status}
-                                                 onClick={(e) => this.onSubmit(e, row.id)}> Accept </ColorButton>
+                                                 onClick={(e) => this.onSubmit(e, row.id, row.email)}> Accept </ColorButton>
                                     <Button variant="contained"
                                             color="secondary"
                                             name="Decline"
                                             // disabled={!!this.state.status}
-                                            onClick={(e) => this.onSubmit(e, row.id)}> Decline </Button>
+                                            onClick={(e) => this.onSubmit(e, row.id,  row.email)}> Decline </Button>
                                 </TableRow>
                             ))}
                         </TableBody>

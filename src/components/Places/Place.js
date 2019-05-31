@@ -26,6 +26,7 @@ class Place extends React.Component {
 
         // console.log(this.props.link.rez)
 
+        dataPoints = []
         this.props.link.rez.map(function (item, index) {
             let elemDict = {}
             elemDict["label"] = item[0]
