@@ -48,7 +48,7 @@ class Form extends React.Component {
     }
 
     onChange(event, key) {
-        if(event.value){
+        if (event.value) {
             event.target = {
                 value: event.value
             }
@@ -62,8 +62,10 @@ class Form extends React.Component {
         const formData = {
             email: this.state.email,
             name: this.state.name,
-            fromDateTimestamp: Date.now(this.state.fromDate),
-            toDateTimestamp: Date.now(this.state.toDate),
+            // fromDateTimestamp: parseInt(Date.now(this.state.fromDate) / 1000),
+            fromDateTimestamp: new Date(this.state.fromDate).getTime() / 1000,
+            // toDateTimestamp: parseInt(Date.now(this.state.toDate) / 1000),
+            toDateTimestamp: new Date(this.state.toDate).getTime() / 1000,
             comment: this.state.comment,
             nrRemindHours: this.state.reminder,
             phone: this.state.phone,
@@ -73,7 +75,7 @@ class Form extends React.Component {
             placeId: this.props.location.pathname.split('/')[2]
         };
         this.props.submitForm(formData);
-        this.setState({submitted:true})
+        this.setState({submitted: true})
     }
 
     render() {
@@ -83,7 +85,7 @@ class Form extends React.Component {
         if (this.state.submitted) {
             return <Redirect to='/places'/>
         }
-        let rooms = this.state.rooms.map((room, key) =>{
+        let rooms = this.state.rooms.map((room, key) => {
             ids[room.name] = room.id;
             return room.name
         });
@@ -105,7 +107,7 @@ class Form extends React.Component {
                 <TextField
                     label="De la"
                     type="datetime-local"
-                    defaultValue="2019-05-30T10:30"
+                    defaultValue="2019-05-31T10:30"
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -116,7 +118,7 @@ class Form extends React.Component {
                 <TextField
                     label="Pana la"
                     type="datetime-local"
-                    defaultValue="2017-05-30T10:30"
+                    defaultValue="2019-05-31T10:30"
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -139,12 +141,12 @@ class Form extends React.Component {
                 />
 
                 <InputDropdown
-                    style       = {{marginTop: "10px"}}
-                    title       = "Camere"
-                    value       = {this.state.room}
-                    onChange    = {(e) => this.onChange(e, 'room')}
-                    options     = {rooms}
-                    placeholder = 'Alege o camera   '
+                    style={{marginTop: "10px"}}
+                    title="Camere"
+                    value={this.state.room}
+                    onChange={(e) => this.onChange(e, 'room')}
+                    options={rooms}
+                    placeholder='Alege o camera   '
                 />
 
                 <TextField

@@ -13,18 +13,18 @@ let dataPoints = []
 class Place extends React.Component {
 
     componentWillMount() {
-        this.props.getStats()
+        this.props.getStats(this.props.location.state.id)
     }
 
     render() {
         // const placesId = this.props.match.params.placesId;
         const place = this.props.location.state;
         let link = `https://www.google.com/maps/embed/v1/place?q=${place.name}&key=AIzaSyAbBGJtRp255cAdDqpCMd0JBAJbINn0kRs`;
-        
+        console.log(this.props.link)
         if(this.props.link === null)
-            return null
-        
-        console.log(this.props.link.rez)
+            return null;
+
+        // console.log(this.props.link.rez)
 
         this.props.link.rez.map(function(item, index) {
             let elemDict = {}
@@ -106,14 +106,14 @@ class RangeBarChart extends React.Component {
         },
         data: [{
             type: "column",
-            yValueFormatString: "#,### Reservations",   
+            yValueFormatString: "#,### Reservations",
             dataPoints: dataPoints
         }]
     }
     return (
     <div>
         <h1>React Range Bar Chart</h1>
-        <CanvasJSChart options = {options} 
+        <CanvasJSChart options = {options}
             /*onRef = {ref => this.chart = ref}*/
         />
         { /*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
