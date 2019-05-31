@@ -23,7 +23,7 @@ class MyPlaces extends React.Component {
     }
 
     render() {
-        if (this.props.places.length === 0 || this.props.places === "success"){
+        if (this.props.places.length === 0 || this.props.places === "success") {
             return null;
         }
 
@@ -34,18 +34,21 @@ class MyPlaces extends React.Component {
                         return <PlaceTile key={i} place={place} />
                     }
                 })}
-                <Link to={{
-                    pathname: `/my-places/create/form`,
-                    state: this.props.place
-                }}>
-                    <Button
-                        className="place_add"
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        style={{ marginTop: "30px", backgroundColor: '#0075ff' }}> +
+                {(localStorage.getItem('userId')) ?
+                    <Link to={{
+                        pathname: `/my-places/create/form`,
+                        state: this.props.place
+                    }}>
+                        <Button
+                            className="place_add"
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            style={{ marginTop: "30px", backgroundColor: '#0075ff' }}> +
                 </Button>
-                </Link>
+                    </Link>
+                    : null
+                }
             </div>
         )
     }
