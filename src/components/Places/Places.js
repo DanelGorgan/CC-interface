@@ -2,13 +2,16 @@ import React from 'react';
 
 import PlaceTile from './PlaceTile'
 
-import { connect } from "react-redux";
+import Button from "@material-ui/core/Button";
 
-import { getPlaces } from '../../actions/Places'
+import {connect} from "react-redux";
 
-import { searchPlaces, recommendPlaces } from "../../actions/Search";
+import {getPlaces} from '../../actions/Places'
+
+import {searchPlaces, recommendPlaces} from "../../actions/Search";
 
 import '../../styles/css/Courses.css'
+import {Link} from "react-router-dom";
 
 class Places extends React.Component {
 
@@ -48,7 +51,7 @@ class Places extends React.Component {
                             <option value="club">club</option>
                             <option value="office">office</option>
                         </select>
-                        <input type="text" name="name" id="location" />
+                        <input type="text" name="name" id="location"/>
                         <button className="btn btn-primary btn-sm" onClick={this.search}>Cauta</button>
                         <p> Nu s-a gasit nimic </p>
                     </div>
@@ -64,12 +67,16 @@ class Places extends React.Component {
                         <option value="club">club</option>
                         <option value="office">office</option>
                     </select>
-                    <input type="text" name="name" id="location" />
+                    <input type="text" name="name" id="location"/>
                     <button className="btn btn-primary btn-sm" onClick={this.search}>Cauta</button>
                 </div>
-                {this.props.places.map((place, i) => <PlaceTile key={i} place={place} />)}
-                {this.props.recommend? <h2>Userii au mai cautat si: </h2> : null}
-                {this.props.recommend? this.props.recommend.rec.map((place) => <p>{place.name}</p>) : null}
+                {this.props.places.map((place, i) => <PlaceTile key={i} place={place}/>)}
+                {this.props.recommend ? <h2>Userii au mai cautat si: </h2> : null}
+                {this.props.recommend ? this.props.recommend.rec.map((place) =>
+                    <Link to={{
+                    pathname: `/places/${place.id}`,
+                    state: place
+                    }}>{place.name}</Link>) : null}
             </div>
         )
     }
@@ -80,4 +87,4 @@ const mapStateToProps = state => ({
     recommend: state.recommend.recommend
 });
 
-export default connect(mapStateToProps, { getPlaces, searchPlaces, recommendPlaces })(Places);
+export default connect(mapStateToProps, {getPlaces, searchPlaces, recommendPlaces})(Places);

@@ -10,7 +10,7 @@ import SignUp from './components/SignUp';
 import Places from './components/Places';
 import ReservationPlaces from './components/ReservationPlaces';
 import {Place} from './components/Places';
-import {MyPlace} from './components/MyPlaces';
+import {MyPlace, MyPlaceForm, MyPlaceUpdate} from './components/MyPlaces';
 import MyPlaces from './components/MyPlaces';
 import setAuthToken from "./utils/setAuthToken";
 import Statistics from './components/Statistics';
@@ -33,6 +33,8 @@ class App extends Component {
                     <Route exact path={ROUTES.SIGN_OUT} component={SignOut}/>
                     <Route exact path={ROUTES.MY_PLACES} component={MyPlaces}/>
                     <Route exact path={ROUTES.MY_PLACE} component={MyPlace}/>
+                    <Route exact path={ROUTES.MY_PLACE_FORM} component={MyPlaceForm}/>
+                    <Route exact path={ROUTES.MY_PLACE_UPDATE} component={MyPlaceUpdate}/>
                     <Route exact path={ROUTES.PLACES} component={Places}/>
                     <Route exact path={ROUTES.RESERVATION_PLACES} component={ReservationPlaces}/>
                     <Route exact path={ROUTES.PLACE} component={Place}/>
