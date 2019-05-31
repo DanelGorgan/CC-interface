@@ -3,13 +3,18 @@ import {connect} from "react-redux";
 import TextField from '@material-ui/core/TextField';
 import '../../styles/css/Course.css'
 import Button from "@material-ui/core/Button";
+import InputDropdown from '../core/InputDropdown'
 import {Redirect} from 'react-router-dom'
 
-import {submitForm} from '../../actions/Reservation'
+import {submitForm, getRooms} from '../../actions/Reservation'
 
-let ok = 0;
+let ids = [];
 
 class Form extends React.Component {
+
+    componentWillMount() {
+        this.props.getRooms(this.props.location.pathname.split('/')[2]);
+    }
 
     constructor() {
         super();
@@ -20,9 +25,12 @@ class Form extends React.Component {
             name: "",
             fromDate: "",
             toDate: "",
+            submitted: "",
             comment: "",
+            room: "",
             reminder: "",
             reservations: "",
+            rooms: "",
             errors: null
         };
         this.onSubmit = this.onSubmit.bind(this);
@@ -32,13 +40,19 @@ class Form extends React.Component {
     componentDidUpdate(prevProps) {
         if (this.props !== prevProps) {
             this.setState({
-                reservations: this.props.reservations
+                reservations: this.props.reservations,
+                rooms: this.props.rooms
             });
 
         }
     }
 
     onChange(event, key) {
+        if (event.value) {
+            event.target = {
+                value: event.value
+            }
+        }
         this.setState({
             [key]: event.target.value,
         });
@@ -48,22 +62,33 @@ class Form extends React.Component {
         const formData = {
             email: this.state.email,
             name: this.state.name,
-            fromDateTimestamp: Date.now(this.state.fromDate),
-            toDateTimestamp: Date.now(this.state.toDate),
+            // fromDateTimestamp: parseInt(Date.now(this.state.fromDate) / 1000),
+            fromDateTimestamp: new Date(this.state.fromDate).getTime() / 1000,
+            // toDateTimestamp: parseInt(Date.now(this.state.toDate) / 1000),
+            toDateTimestamp: new Date(this.state.toDate).getTime() / 1000,
             comment: this.state.comment,
             nrRemindHours: this.state.reminder,
             phone: this.state.phone,
             wasReminded: false,
             status: "pending",
+            roomId: ids[this.state.room],
             placeId: this.props.location.pathname.split('/')[2]
         };
         this.props.submitForm(formData);
+        this.setState({submitted: true})
     }
 
     render() {
-        if (this.state.reservations) {
+        if (!this.state.rooms) {
+            return null
+        }
+        if (this.state.submitted) {
             return <Redirect to='/places'/>
         }
+        let rooms = this.state.rooms.map((room, key) => {
+            ids[room.name] = room.id;
+            return room.name
+        });
 
         return (
             <div className='course panel'>
@@ -71,34 +96,34 @@ class Form extends React.Component {
                 <TextField
                     label="Nume"
                     onChange={
-                    (e) => this.onChange(e, 'name')}
-            />
+                        (e) => this.onChange(e, 'name')}
+                />
                 <TextField
-                label="Telefon"
-                onChange={
-                    (e) => this.onChange(e, 'phone')}
-            />
+                    label="Telefon"
+                    onChange={
+                        (e) => this.onChange(e, 'phone')}
+                />
                 <br/>
                 <TextField
                     label="De la"
                     type="datetime-local"
-                    defaultValue="2019-05-30T10:30"
+                    defaultValue="2019-05-31T10:30"
                     InputLabelProps={{
                         shrink: true,
                     }}
                     onChange={
-                    (e) => this.onChange(e, 'fromDate')}
+                        (e) => this.onChange(e, 'fromDate')}
 
-                     />
+                />
                 <TextField
                     label="Pana la"
                     type="datetime-local"
-                    defaultValue="2017-05-30T10:30"
+                    defaultValue="2019-05-31T10:30"
                     InputLabelProps={{
                         shrink: true,
                     }}
                     onChange={
-                    (e) => this.onChange(e, 'toDate')}
+                        (e) => this.onChange(e, 'toDate')}
                 />
                 <br/>
 
@@ -109,20 +134,29 @@ class Form extends React.Component {
                 />
 
                 <TextField
-                label="La cate ore doresti sa primesti reminder?"
-                type="number"
-                onChange={
-                    (e) => this.onChange(e, 'reminder')}
+                    label="La cate ore doresti sa primesti reminder?"
+                    type="number"
+                    onChange={
+                        (e) => this.onChange(e, 'reminder')}
+                />
+
+                <InputDropdown
+                    style={{marginTop: "10px"}}
+                    title="Camere"
+                    value={this.state.room}
+                    onChange={(e) => this.onChange(e, 'room')}
+                    options={rooms}
+                    placeholder='Alege o camera   '
                 />
 
                 <TextField
-                id="outlined-textarea"
-                label="Comentarii"
-                multiline
-                margin="normal"
-                variant="outlined"
-                onChange={
-                    (e) => this.onChange(e, 'comment')}
+                    id="outlined-textarea"
+                    label="Comentarii"
+                    multiline
+                    margin="normal"
+                    variant="outlined"
+                    onChange={
+                        (e) => this.onChange(e, 'comment')}
                 />
 
 
@@ -141,7 +175,8 @@ class Form extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    reservations: state.reservations.reservations
+    reservations: state.reservations.reservations,
+    rooms: state.reservations.rooms
 });
 
-export default connect(mapStateToProps, {submitForm})(Form);
+export default connect(mapStateToProps, {submitForm, getRooms})(Form);

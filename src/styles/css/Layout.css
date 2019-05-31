@@ -3,5 +3,6 @@
   margin: auto;
   display: flex;
   justify-content: left;
-  background-image: url("../../images/background.jpg");
+    background-color: #E0E0E0;
+  /*background-image: url("../../images/background.jpg");*/
 }

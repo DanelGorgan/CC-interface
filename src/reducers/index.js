@@ -8,6 +8,8 @@ import userReducer from './userReducer';
 import errorReducer from "./errorReducer";
 import registerReducer from "./registerReducer";
 import statisticsReducer from "./statisticsReducer"
+import recommendReducer from "./recommendReducer";
+
 
 /*
  * We combine all reducers into a single object before updated data is dispatched (sent) to store
@@ -20,6 +22,7 @@ const reducers = combineReducers({
     register: registerReducer,
     user: userReducer,
     places: coursesReducer,
+    recommend: recommendReducer,
     link: mapReducer,
     reservations: reservationsReducer,
     reservationsResponse: reservationsReducer,

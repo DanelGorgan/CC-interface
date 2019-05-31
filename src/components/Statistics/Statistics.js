@@ -86,6 +86,7 @@ const mapStateToProps = state => ({
 
 class RangeBarChart extends React.Component {
   render() {
+  dataPoints = []
   this.props.locations.map(function(item, index) {
     let elemDict = {}
     elemDict["y"] = item[1]

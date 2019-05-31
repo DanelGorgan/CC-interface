@@ -1,12 +1,12 @@
-﻿import axios from "axios"
+import axios from "axios"
 
-export const getPlaces = () => dispatch => {
+export const submitForm = (data) => dispatch => {
     axios
-        .get("https://datastore-project-236517.appspot.com/places")
+        .post("https://datastore-project-236517.appspot.com/places", data)
         .then(result => {
             dispatch({
-                type: 'GET_PLACES',
-                places: result.data
+                type: 'POST_PLACES',
+                places: result.data.message
             })
         })
         .catch(error => {
@@ -18,13 +18,14 @@ export const getPlaces = () => dispatch => {
 
 };
 
-export const addPlace = (formData) => dispatch => {
+export const updateForm = (data) => dispatch => {
+    console.log(data)
     axios
-        .post("https://datastore-project-236517.appspot.com/places", formData)
+        .put(`https://datastore-project-236517.appspot.com/places/${data.id}`, data)
         .then(result => {
             dispatch({
-                type: 'GET_PLACES',
-                places: result.data
+                type: 'PUT_PLACES',
+                places: result.data.message
             })
         })
         .catch(error => {
@@ -33,4 +34,5 @@ export const addPlace = (formData) => dispatch => {
                 payload: error.response.data
             })
         });
-}
+
+};

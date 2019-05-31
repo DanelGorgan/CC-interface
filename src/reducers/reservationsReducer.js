@@ -4,6 +4,11 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
+        case 'GET_ROOMS':
+            return {
+                ...state,
+                rooms: action.rooms
+            };
         case 'GET_RESERVATIONS':
             return {
                 ...state,
