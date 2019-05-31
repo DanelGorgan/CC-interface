@@ -55,7 +55,7 @@ class MyPlaceForm extends React.Component {
                 email: this.state.email,
                 phone: this.state.phone
             },
-            ownerId: localStorage.getItem('userId')
+            ownerId: localStorage.getItem('userId'),
         };
         this.props.submitForm(formData);
     }

@@ -74,7 +74,7 @@ class Place extends React.Component {
                     place.ownerId === localStorage.getItem('userId') ?
                     <Link to={{
                         pathname: `/places/${place.id}/update`,
-                        state: this.props.place
+                        state: this.props.location.state
                     }}>
                         <Button
                             className="course__submit"
@@ -87,7 +87,7 @@ class Place extends React.Component {
                         :
                         <Link to={{
                             pathname: `/places/${place.id}/form`,
-                            state: this.props.place
+                            state: this.props.location.state
                         }}>
                             <Button
                                 className="course__submit"
@@ -98,8 +98,6 @@ class Place extends React.Component {
                             </Button>
                         </Link>
                 }
-
-
             </div>
         )
     }
