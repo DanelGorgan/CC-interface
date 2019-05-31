@@ -2,6 +2,8 @@ import React from 'react';
 
 import PlaceTile from './PlaceTile'
 
+import Button from "@material-ui/core/Button";
+
 import { connect } from "react-redux";
 
 import { getPlaces } from '../../actions/Places'
@@ -56,8 +58,8 @@ class Places extends React.Component {
                     <input type="text" name="name" id="location" />
                     <button className="btn btn-primary btn-sm" onClick={this.search}>Cauta</button>
                 </div>
-                {this.props.places.map((place, i) => <PlaceTile key={i} place={place} />)}
-            </div>
+                {this.props.places.map((place, i) => <PlaceTile key={i} place={place} />)}               
+            </div>    
         )
     }
 }
