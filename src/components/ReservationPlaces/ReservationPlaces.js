@@ -114,6 +114,7 @@ class ReservationPlaces extends React.Component {
             reservationsResponse: [],
             reservations: [],
             rows: [],
+            ids: [],
             page: 0,
             rowsPerPage: 5
         };
@@ -125,6 +126,7 @@ class ReservationPlaces extends React.Component {
         }
 
         this.props.updateReservation(id, e.target.firstChild.nodeValue);
+
     };
 
     componentDidUpdate(prevProps) {
@@ -134,7 +136,10 @@ class ReservationPlaces extends React.Component {
                 rows: this.props.reservations,
                 reservationsResponse: this.props.reservationsResponse
             });
+        }
 
+        if(this.props.reservationsResponse !== prevProps.reservationsResponse) {
+            window.location.reload();
         }
     }
 
@@ -156,8 +161,8 @@ class ReservationPlaces extends React.Component {
         }
         rowsCount = rows.length;
         return (
-            <div className='courses-page'>
-                <Paper>
+            <div className='width'>
+                <Paper className='width'>
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -167,6 +172,7 @@ class ReservationPlaces extends React.Component {
                                 <TableCell align="right">Phone</TableCell>
                                 <TableCell align="right">fromDate</TableCell>
                                 <TableCell align="right">toDate</TableCell>
+                                <TableCell align="right">Comentarii</TableCell>
                                 <TableCell align="right">status</TableCell>
                             </TableRow>
                         </TableHead>
@@ -179,10 +185,11 @@ class ReservationPlaces extends React.Component {
                                     <TableCell align="right">{row.name}</TableCell>
                                     <TableCell align="right">{row.email}</TableCell>
                                     <TableCell align="right">{row.phone}</TableCell>
-                                    <TableCell align="right">{row.fromDate}</TableCell>
-                                    <TableCell align="right">{row.toDate}</TableCell>
+                                    <TableCell align="right">{new Date(row.fromDateTimestamp).toString()}</TableCell>
+                                    <TableCell align="right">{new Date(row.toDateTimestamp).toString()}</TableCell>
+                                    <TableCell align="right">{row.comment}</TableCell>
                                     <TableCell
-                                        align="right">{this.state.status ? this.state.status : row.status}</TableCell>
+                                        align="right">{this.state.ids.includes(row.id) ? this.state.status : row.status}</TableCell>
                                     <ColorButton variant="contained"
                                                  color="primary"
                                                  name="Accept"

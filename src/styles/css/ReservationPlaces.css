@@ -1,0 +1,6 @@
+.layout__body {
+    padding: 30px 20px;
+    margin: auto;
+    display: -ms-flexbox;
+    display: flex;
+}
