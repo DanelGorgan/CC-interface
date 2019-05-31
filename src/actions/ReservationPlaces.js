@@ -11,9 +11,10 @@ export const getReservations = () => dispatch => {
             })
         })
         .catch(error => {
+
             dispatch({
                 type: 'GET_ERRORS_RESERVATIONS',
-                payload: error.response.data
+                payload: error
             })
         });
 

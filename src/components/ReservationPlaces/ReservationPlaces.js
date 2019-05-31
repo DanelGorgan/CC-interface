@@ -184,8 +184,8 @@ class ReservationPlaces extends React.Component {
                                     <TableCell align="right">{row.name}</TableCell>
                                     <TableCell align="right">{row.email}</TableCell>
                                     <TableCell align="right">{row.phone}</TableCell>
-                                    <TableCell align="right">{new Date(row.fromDateTimestamp).toString()}</TableCell>
-                                    <TableCell align="right">{new Date(row.toDateTimestamp).toString()}</TableCell>
+                                    <TableCell align="right">{new Date(row.fromDateTimestamp *1000).toISOString()}</TableCell>
+                                    <TableCell align="right">{new Date(row.toDateTimestamp*1000).toISOString()}</TableCell>
                                     <TableCell align="right">{row.comment}</TableCell>
                                     <TableCell
                                         align="right">{this.state.ids.includes(row.id) ? this.state.status : row.status}</TableCell>
