@@ -47,7 +47,7 @@ class MyPlaceUpdate extends React.Component {
 
     onSubmit(event) {
         const formData = {
-            address: this.state.address ? this.state.address : this.props.location.state.name,
+            address: this.state.address ? this.state.address : this.props.location.state.address,
             description: this.state.description ? this.state.description : this.props.location.state.description,
             name: this.state.name ? this.state.name : this.props.location.state.name,
             type: this.state.type ? this.state.type : this.props.location.state.type,
