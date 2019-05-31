@@ -4,6 +4,11 @@
 
 export default function (state = initialState, action) {
     switch (action.type) {
+        case 'POST_PLACES':
+            return {
+                ...state,
+                places: action.places
+            };
         case 'GET_PLACES':
             return {
                 ...state,

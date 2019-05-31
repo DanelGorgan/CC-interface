@@ -5,4 +5,6 @@ import MyPlaceForm from  "./MyPlaceForm"
 
 export default MyPlaces;
 
-export {MyPlace, MyPlaceForm};
+export {MyPlaceForm};
+
+export {MyPlace};

@@ -10,7 +10,7 @@ import { getPlaces } from '../../actions/Places'
 
 import { searchPlaces } from "../../actions/Search";
 
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import '../../styles/css/Courses.css'
 
@@ -23,6 +23,10 @@ class MyPlaces extends React.Component {
     }
 
     render() {
+        if (this.props.places.length === 0 || this.props.places === "success"){
+            return null;
+        }
+
         return (
             <div className='courses-page'>
                 {this.props.places.map((place, i) => {
@@ -31,7 +35,7 @@ class MyPlaces extends React.Component {
                     }
                 })}
                 <Link to={{
-                    pathname: `/my-places/form`,
+                    pathname: `/my-places/create/form`,
                     state: this.props.place
                 }}>
                     <Button
